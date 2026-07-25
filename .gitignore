@@ -1,0 +1,61 @@
+# 运行时数据
+data/
+uploads/
+logs/
+*.db
+*.db-wal
+*.db-shm
+
+# 环境变量
+.env
+
+# Docker
+.docker/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+*.spec
+.venv/
+venv/
+build_venv/
+
+# PyInstaller 构建产物
+*.exe
+!build_installer.py
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node
+node_modules/
+frontend/dist/
+
+# 测试/调试
+.pytest_cache/
+.deepeval/
+
+# 证书
+certs/
+*.pem
+
+# 日志文件
+*.log
+
+# Excel 数据文件
+*.xlsx
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 临时脚本
+_github_copy.py
