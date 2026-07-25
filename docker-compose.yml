@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "${NGINX_PORT:-80}:80"
+      - "${NGINX_SSL_PORT:-443}:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./frontend/dist:/usr/share/nginx/html:ro
+      - ./data/backups:/usr/share/nginx/backups:ro
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    volumes:
+      - ./data:/app/data
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
+    environment:
+      - DEPLOY_MODE=${DEPLOY_MODE:-local}
+      - ACCESS_KEY=${ACCESS_KEY:-}
+      - DATABASE_URL=sqlite:////app/data/business.db
+    env_file:
+      - .env
+    restart: unless-stopped
